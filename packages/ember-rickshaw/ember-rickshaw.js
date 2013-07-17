@@ -36,18 +36,13 @@ Rickshaw.Graph.Ember = function(options) {
 
     }
 
-    // Configure the observers for updating the Rickshaw graph when a value changes.
-    models.forEach(function(model) {
-
-        // We need an observer on each of the properties we're watching, so we need to iterate over them.
-        for (var property in this.properties) {
-            if (this.properties.hasOwnProperty(property)) {
-                // Add an observer for the property name. If the value changes, the graph will be automatically re-rendered.
-                Ember.addObserver(model, this.properties[property], this, 'render');
-            }
+    // We need an observer on each of the properties we're watching, so we need to iterate over them.
+    for (var propertyIndex in this.properties) {
+        if (this.properties.hasOwnProperty(propertyIndex)) {
+            // Add an observer for the property name. If the value changes, the graph will be automatically re-rendered.
+            Ember.addObserver(this.models, '@each.%@'.fmt(this.properties[propertyIndex]), this, 'render');
         }
-
-    }, this);
+    }
 
     // Observe the length of the collection so the graph can re-render if models are added and/or removed.
     Ember.addObserver(models, 'length', this, 'render');
