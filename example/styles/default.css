@@ -51,6 +51,11 @@ ul.cats li {
     width: 300px;
 }
 
+ul.cats li.add a {
+    font-weight: bold;
+    font-size: 15px;
+}
+
 ul.cats li a {
     float: right;
     font-size: 12px;

@@ -20,6 +20,16 @@ App.IndexController = Ember.ArrayController.extend({
 
     },
 
+    addCat: function() {
+
+        var name    = prompt('Name the little darling:'),
+            age     = prompt('How many years old is %@?'.fmt(name)),
+            caught  = prompt('And how many mice has %@ caught?'.fmt(name));
+
+        this.pushObject(Ember.Object.create({ name: name, age: age, caughtMice: caught }));
+
+    },
+
     incrementCaughtMice: function(model) {
         model.incrementProperty('caughtMice');
     }

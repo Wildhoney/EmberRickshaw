@@ -29,16 +29,14 @@ App.IndexView = Ember.View.extend({
             }]
         });
 
-        var yAxis = new Rickshaw.Graph.Axis.Y( {
+        new Rickshaw.Graph.Axis.Y( {
             graph: graph.toRickshaw(),
             orientation: 'right',
             pixelsPerTick: 20,
             element: document.querySelector('.age-distribution-graph')
         } );
 
-//        yAxis.render();
-
-        var x_ticks = new Rickshaw.Graph.Axis.X({
+        new Rickshaw.Graph.Axis.X({
             graph: graph.toRickshaw(),
             orientation: 'bottom',
             element: document.querySelector('.age-distribution-graph'),

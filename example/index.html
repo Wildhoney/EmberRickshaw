@@ -40,12 +40,18 @@
         <ul class="cats">
 
             {{#each controller}}
+
                 <li>
                     <div class="name">{{name}}</div>
                     <a {{action "incrementCaughtMice" this}} href="javascript:void(0);">Caught {{caughtMice}} mice!</a>
                     {{view Ember.TextField valueBinding="age"}}
                 </li>
+
             {{/each}}
+
+            <li class="add">
+                <a {{action "addCat"}} href="javascript:void(0);">Add another cat!</a>
+            </li>
 
         </ul>
 
