@@ -110,10 +110,6 @@
     display: block;
     z-index: 50;
 }
-.rickshaw_graph .y_axis,
-.rickshaw_graph  .x_axis_d3 {
-    fill: none;
-}
 .rickshaw_graph .y_ticks .tick,
 .rickshaw_graph .x_ticks_d3 .tick {
     stroke: rgba(0, 0, 0, 0.16);

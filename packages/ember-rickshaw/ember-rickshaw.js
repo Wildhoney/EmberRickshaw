@@ -62,6 +62,7 @@ Rickshaw.Graph.Ember = function(options) {
 
     // Keep a reference to the original Rickshaw graph object, since we're only
     // augmenting Rickshaw and not trying to replace it.
+    delete this.options.collection;
     this.graph = new Rickshaw.Graph(this.options);
 
 };
@@ -116,4 +117,9 @@ Rickshaw.Graph.Ember.prototype.render = function() {
     this.setData();
     this.graph.render();
 
+};
+
+Rickshaw.Graph.Ember.prototype.ticks = function(index, propertyName) {
+    var properties = this.models.mapProperty(propertyName);
+    return properties[index];
 };

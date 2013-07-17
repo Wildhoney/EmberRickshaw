@@ -20,14 +20,14 @@ h2 {
 }
 
 div.age-distribution-graph {
-    padding: 5px;
     border: 1px solid lightgrey;
-    width: 500px;
-    height: 285px;
+    width: 535px;
+    padding: 30px 10px 0 40px;
+    height: 295px;
+    color: black;
     margin-top: 25px;
     box-shadow: 0 0 10px rgba(0, 0, 0, .05);
     float: left;
-    overflow: hidden;
 }
 
 ul.cats {
@@ -73,6 +73,10 @@ div.detail {
     line-height: 30px;
     padding: 0 10px 0 10px;
     margin-top: 5px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
 }
 
 div.detail div {
