@@ -7,14 +7,14 @@ Rickshaw.Graph.Ember = function(options) {
 
     // Find the models that have been supplied. For the moment we only support one line, but will
     // support two or more in the near future.
-    Ember.assert('You must supply the `models` array in the `series` attribute.', !!options.series[0].models);
+    Ember.assert('You must supply the `collection` array in the `data` attribute.', !!options.series[0].data.collection);
 
     // Assert that we have the `property` object.
-    Ember.assert('You must specify the `property` in which to use for the graph data.', !!options.series[0].property);
+    Ember.assert('You must specify the `property` in which to use for the graph data.', !!options.series[0].data.property);
 
-    var series      = options.series[0],
-        models      = series.models,
-        property    = series.property;
+    var data        = options.series[0].data,
+        models      = data.collection,
+        property    = data.property;
 
     models.forEach(function(model) {
         // Add an observer for the property name. If the value changes, the graph will be automatically re-rendered.
@@ -28,13 +28,9 @@ Rickshaw.Graph.Ember = function(options) {
     this.models     = models;
     this.property   = property;
 
-    // Clean up the model removing the objects that Rickshaw doesn't require.
-    delete series.models;
-    delete series.property;
-
     // Store the options, and create a blank data array to initially render before the models are inspected.
-    this.options    = options;
-    series.data     = [{ x: 0, y: 0 }];
+    this.options            = options;
+    options.series[0].data  = [{ x: 0, y: 0 }];
 
     if (Ember.isNone(options.element)) {
         // If we haven't specified the `element` option then we'll create a ghost DIV for testing purposes.

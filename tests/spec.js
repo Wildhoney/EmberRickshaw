@@ -11,8 +11,7 @@ describe('Ember Rickshaw', function() {
             stroke: true,
             series: [{
                 color: '#cae2f7',
-                models: [Ember.Object.create({ name: 'Kipper', age: 17 })],
-                property: 'age'
+                data: { collection: [Ember.Object.create({ name: 'Kipper', age: 17 })], property: 'age' }
             }]
         });
 

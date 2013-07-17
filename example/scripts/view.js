@@ -18,8 +18,7 @@ App.IndexView = Ember.View.extend({
             stroke: true,
             series: [{
                 color: '#cae2f7',
-                models: this.get('controller'),
-                property: 'age'
+                data: { collection: this.get('controller'), property: 'age' }
             }]
         });
 
