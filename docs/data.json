@@ -1,0 +1,63 @@
+{
+    "project": {
+        "name": "EmberRickshaw"
+    },
+    "files": {
+        "packages\\ember-rickshaw\\ember-rickshaw.js": {
+            "name": "packages\\ember-rickshaw\\ember-rickshaw.js",
+            "modules": {},
+            "classes": {
+                "Rickshaw.Graph.Ember": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {
+        "Rickshaw.Graph.Ember": {
+            "name": "Rickshaw.Graph.Ember",
+            "shortname": "Rickshaw.Graph.Ember",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "packages\\ember-rickshaw\\ember-rickshaw.js",
+            "line": 1,
+            "params": [
+                {
+                    "name": "options",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "is_constructor": 1
+        }
+    },
+    "classitems": [
+        {
+            "file": "packages\\ember-rickshaw\\ember-rickshaw.js",
+            "line": 60,
+            "itemtype": "method",
+            "name": "setData\nTake the data from the models based on the property to create the data.",
+            "return": {
+                "description": "",
+                "type": "Array"
+            },
+            "class": "Rickshaw.Graph.Ember"
+        },
+        {
+            "file": "packages\\ember-rickshaw\\ember-rickshaw.js",
+            "line": 81,
+            "itemtype": "method",
+            "name": "render\nRendering the Rickshaw graph based on the model data.",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "Rickshaw.Graph.Ember"
+        }
+    ],
+    "warnings": []
+}

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>packages\ember-rickshaw\ember-rickshaw.js - EmberRickshaw</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title="EmberRickshaw"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/Rickshaw.Graph.Ember.html">Rickshaw.Graph.Ember</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: packages\ember-rickshaw\ember-rickshaw.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/**
+ * @class Rickshaw.Graph.Ember
+ * @param options {Object}
+ * @constructor
+ */
+Rickshaw.Graph.Ember = function(options) {
+
+    // Find the models that have been supplied. For the moment we only support one line, but will
+    // support two or more in the near future.
+    Ember.assert(&#x27;You must supply the &#x60;models&#x60; array in the &#x60;series&#x60; attribute.&#x27;, !!options.series[0].models);
+
+    // Assert that we have the &#x60;property&#x60; object.
+    Ember.assert(&#x27;You must specify the &#x60;property&#x60; in which to use for the graph data.&#x27;, !!options.series[0].property);
+
+    var series      = options.series[0],
+        models      = series.models,
+        property    = series.property;
+
+    models.forEach(function(model) {
+        // Add an observer for the property name. If the value changes, the graph will be automatically re-rendered.
+        Ember.addObserver(model, property, this, &#x27;render&#x27;);
+    }, this);
+
+    // Observe the length of the collection so the graph can re-render if models are added and/or removed.
+    Ember.addObserver(models, &#x27;length&#x27;, this, &#x27;render&#x27;);
+
+    // Take what we need.
+    this.models     = models;
+    this.property   = property;
+
+    // Clean up the model removing the objects that Rickshaw doesn&#x27;t require.
+    delete series.models;
+    delete series.property;
+
+    // Store the options, and create a blank data array to initially render before the models are inspected.
+    this.options    = options;
+    series.data     = [{ x: 0, y: 0 }];
+
+    if (Ember.isNone(options.element)) {
+        // If we haven&#x27;t specified the &#x60;element&#x60; option then we&#x27;ll create a ghost DIV for testing purposes.
+        this.options.element = document.createElement(&#x27;div&#x27;);
+
+        // Let everybody know we&#x27;re using Rickshaw in testing mode.
+        Ember.Logger.info(&quot;We&#x27;re using Rickshaw in testing mode and therefore nothing will be visible.&quot;);
+    }
+
+    // Keep a reference to the original Rickshaw graph object, since we&#x27;re only
+    // augmenting Rickshaw and not trying to replace it.
+    this.graph = new Rickshaw.Graph(this.options);
+
+};
+
+Rickshaw.Graph.Ember.prototype.toRickshaw = function() {
+
+    // Since we&#x27;re masquerading as Rickshaw, we&#x27;ll return the actual graph instance we&#x27;re using from the constructor.
+    return this.graph;
+
+};
+
+/**
+ * @method setData
+ * Take the data from the models based on the property to create the data.
+ * @return {Array}
+ */
+Rickshaw.Graph.Ember.prototype.setData = function() {
+
+    var data = [];
+
+    this.models.forEach(function(model, index) {
+        // Iterate over each of the models and find the data based on the property we&#x27;ve specified.
+        data.push({ x: index, y: parseFloat(model.get(this.property)) });
+    }, this);
+
+    // Set up the data, and then render the Rickshaw graph.
+    this.options.series[0].data = data;
+    this.graph.render();
+    return data;
+
+};
+
+/**
+ * @method render
+ * Rendering the Rickshaw graph based on the model data.
+ * @return {void}
+ */
+Rickshaw.Graph.Ember.prototype.render = function() {
+
+    this.setData();
+    this.graph.render();
+
+};
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>
