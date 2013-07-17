@@ -26,7 +26,7 @@ App.IndexController = Ember.ArrayController.extend({
             age     = prompt('How many years old is %@?'.fmt(name)),
             caught  = prompt('And how many mice has %@ caught?'.fmt(name));
 
-        this.pushObject(Ember.Object.create({ name: name, age: age, caughtMice: caught }));
+        this.pushObject(Ember.Object.create({ name: name, age: parseInt(age), caughtMice: parseInt(caught) }));
 
     },
 
