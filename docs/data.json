@@ -38,7 +38,7 @@
     "classitems": [
         {
             "file": "packages\\ember-rickshaw\\ember-rickshaw.js",
-            "line": 72,
+            "line": 74,
             "itemtype": "method",
             "name": "setData\nTake the data from the models based on the property to create the data.",
             "return": {

@@ -38,10 +38,12 @@ Rickshaw.Graph.Ember = function(options) {
 
     // We need an observer on each of the properties we're watching, so we need to iterate over them.
     for (var propertyIndex in this.properties) {
+
         if (this.properties.hasOwnProperty(propertyIndex)) {
             // Add an observer for the property name. If the value changes, the graph will be automatically re-rendered.
             Ember.addObserver(this.models, '@each.%@'.fmt(this.properties[propertyIndex]), this, 'render');
         }
+
     }
 
     // Observe the length of the collection so the graph can re-render if models are added and/or removed.
@@ -97,9 +99,7 @@ Rickshaw.Graph.Ember.prototype.setData = function() {
 
     }, this);
 
-    console.log(this.options.series);
-
-//    this.graph.render();
+    this.graph.render();
     return allData;
 
 };
