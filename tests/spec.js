@@ -9,9 +9,10 @@ describe('Ember Rickshaw', function() {
             width: 500,
             height: 250,
             stroke: true,
+            collection: [Ember.Object.create({ name: 'Kipper', age: 17 })],
             series: [{
                 color: '#cae2f7',
-                data: { collection: [Ember.Object.create({ name: 'Kipper', age: 17 })], property: 'age' }
+                data: 'age'
             }]
         });
 

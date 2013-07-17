@@ -21,7 +21,7 @@ div.age-distribution-graph {
     padding: 5px;
     border: 1px solid lightgrey;
     width: 500px;
-    height: 250px;
+    height: 280px;
     margin-top: 25px;
     box-shadow: 0 0 10px rgba(0, 0, 0, .05);
     float: left;
@@ -40,7 +40,13 @@ ul.cats li {
     height: 30px;
     line-height: 30px;
     border-bottom: 1px solid lightgrey;
-    width: 200px;
+    width: 300px;
+}
+
+ul.cats li a {
+    float: right;
+    font-size: 12px;
+    margin-left: 15px;
 }
 
 ul.cats li div.name {
@@ -57,4 +63,25 @@ ul.cats li input {
     text-align: center;
     box-shadow: inset 0 0 5px rgba(0, 0, 0, .05);
     border: 1px solid lightgrey;
+}
+
+div.detail {
+    background: darkgray;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 10px 0 10px;
+}
+
+div.detail div {
+    float: left;
+    overflow: hidden;
+    margin-right: 10px;
+    font-size: 14px;
+    color: white;
+}
+
+div.detail div:first-child:after {
+    content: "|";
+    color: lightgrey;
+    margin-left: 10px;
 }

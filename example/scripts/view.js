@@ -11,18 +11,30 @@ App.IndexView = Ember.View.extend({
         this._super();
 
         var graph = new Rickshaw.Graph.Ember({
-            renderer: 'area',
+            renderer: 'line',
             element: document.querySelector('.age-distribution-graph'),
             width: 500,
             height: 250,
             stroke: true,
+            collection: this.get('controller'),
             series: [{
-                color: '#cae2f7',
-                data: { collection: this.get('controller'), property: 'age' }
+                color: '#afd55e',
+                name: 'Age',
+                data: 'age'
+            }, {
+                color: '#ba5ed5',
+                name: 'Caught Mice',
+                data: 'caughtMice'
             }]
         });
 
         graph.render();
+
+        new Rickshaw.Graph.HoverDetail({
+            graph: graph.toRickshaw(),
+            xFormatter: function(x) { return 'Cat: ' + x },
+            yFormatter: function(y) { return y }
+        });
 
     }
 

@@ -36,6 +36,7 @@
             {{#each controller}}
                 <li>
                     <div class="name">{{name}}</div>
+                    <a {{action "incrementCaughtMice" this}} href="javascript:void(0);">Caught {{caughtMice}} mice!</a>
                     {{view Ember.TextField valueBinding="age"}}
                 </li>
             {{/each}}
