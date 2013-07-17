@@ -12,7 +12,7 @@ App.IndexView = Ember.View.extend({
 
         var graph = new Rickshaw.Graph.Ember({
             element: document.querySelector('.age-distribution-graph'),
-            renderer: 'line',
+            renderer: 'scatterplot',
             width: 500,
             height: 250,
             stroke: true,

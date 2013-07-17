@@ -102,7 +102,9 @@ Rickshaw.Graph.Ember.prototype.setData = function() {
 
     }, this);
 
-    this.graph.render();
+    console.log(this.options.series);
+
+//    this.graph.render();
     return allData;
 
 };
