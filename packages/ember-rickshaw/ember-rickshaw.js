@@ -29,12 +29,12 @@ Rickshaw.Graph.Ember = function(options) {
             // Keep a track of the properties we're after for each series line.
             this.properties.push(options.series[seriesIndex].data);
 
-            // Initialise the series data with an empty data structure.
-            options.series[seriesIndex].data = [{ x: 0, y: 0 }];
-
         }
 
     }
+
+    // Initialise the series data.
+    this.setData();
 
     // We need an observer on each of the properties we're watching, so we need to iterate over them.
     for (var propertyIndex in this.properties) {
@@ -86,8 +86,12 @@ Rickshaw.Graph.Ember.prototype.setData = function() {
 
         this.models.forEach(function(model, modelIndex) {
 
+            // Detect if the value we're dealing with is a number, otherwise we'll reset it to zero.
+            var value = parseFloat(model.get(property));
+            value = (isNaN(value) ? 0 : value);
+
             // Iterate over each of the models and find the data based on the property we've specified.
-            data.push({ x: modelIndex, y: parseFloat(model.get(property)) });
+            data.push({ x: modelIndex, y: value });
 
         }, this);
 
@@ -99,7 +103,6 @@ Rickshaw.Graph.Ember.prototype.setData = function() {
 
     }, this);
 
-    this.graph.render();
     return allData;
 
 };

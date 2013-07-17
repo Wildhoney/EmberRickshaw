@@ -49,7 +49,7 @@
         },
         {
             "file": "packages\\ember-rickshaw\\ember-rickshaw.js",
-            "line": 107,
+            "line": 110,
             "itemtype": "method",
             "name": "render\nRendering the Rickshaw graph based on the model data.",
             "return": {
