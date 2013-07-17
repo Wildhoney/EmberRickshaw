@@ -17,8 +17,7 @@ You'll be glad to know that if you already know Rickshaw, we haven't changed any
         stroke: true,
         series: [{
             color: '#cae2f7',
-            models: this.get('controller'),
-            property: 'age'
+            data: { collection: this.get('controller'), property: 'age' }
         }]
     });
 
