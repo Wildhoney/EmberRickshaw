@@ -23,7 +23,7 @@ div.age-distribution-graph {
     padding: 5px;
     border: 1px solid lightgrey;
     width: 500px;
-    height: 280px;
+    height: 285px;
     margin-top: 25px;
     box-shadow: 0 0 10px rgba(0, 0, 0, .05);
     float: left;
@@ -72,6 +72,7 @@ div.detail {
     height: 30px;
     line-height: 30px;
     padding: 0 10px 0 10px;
+    margin-top: 5px;
 }
 
 div.detail div {

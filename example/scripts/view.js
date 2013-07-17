@@ -11,7 +11,6 @@ App.IndexView = Ember.View.extend({
         this._super();
 
         var graph = new Rickshaw.Graph.Ember({
-            renderer: 'line',
             element: document.querySelector('.age-distribution-graph'),
             width: 500,
             height: 250,
