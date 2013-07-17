@@ -15,9 +15,10 @@ You'll be glad to know that if you already know Rickshaw, we haven't changed any
         width: 500,
         height: 250,
         stroke: true,
+        collection: this.get('controller'),
         series: [{
             color: '#cae2f7',
-            data: { collection: this.get('controller'), property: 'age' }
+            data: 'age'
         }]
     });
 
