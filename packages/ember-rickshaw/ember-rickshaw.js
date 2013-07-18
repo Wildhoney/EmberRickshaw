@@ -1,4 +1,5 @@
 /**
+ * @module Rickshaw.Graph.Ember
  * @class Rickshaw.Graph.Ember
  * @param options {Object}
  * @constructor
@@ -50,76 +51,100 @@ Rickshaw.Graph.Ember = function(options) {
     Ember.addObserver(models, 'length', this, 'render');
 
     if (Ember.isNone(options.element)) {
+
         // If we haven't specified the `element` option then we'll create a ghost DIV for testing purposes.
         this.options.element = document.createElement('div');
 
         // Let everybody know we're using Rickshaw in testing mode.
         Ember.Logger.info("We're using Rickshaw in testing mode and therefore nothing will be visible.");
+
     }
 
     // Keep a reference to the original Rickshaw graph object, since we're only
     // augmenting Rickshaw and not trying to replace it.
     delete this.options.collection;
-    this.graph = new Rickshaw.Graph(this.options);
+    var graph   = new Rickshaw.Graph(this.options);
+    this.graph  = graph;
 
-};
+    for (var methodName in this.__proto__) {
 
-Rickshaw.Graph.Ember.prototype.toRickshaw = function() {
+        if (this.__proto__.hasOwnProperty(methodName)) {
+            // Copy across all of the methods from the `__proto__` into the actual object, so that we can
+            // explicitly set the `__proto__` to the original graph instance to make `toRickshaw` obsolete.
+            this[methodName] = this.__proto__[methodName];
+            delete this.__proto__[methodName];
+        }
 
-    // Since we're masquerading as Rickshaw, we'll return the actual graph instance we're using from the constructor.
-    return this.graph;
+    }
+
+    // Explicitly set the `__proto__` to the original graph (`Rickshaw.Graph`).
+    this.__proto__ = graph;
 
 };
 
 /**
- * @method setData
- * Take the data from the models based on the property to create the data.
- * @return {Array}
+ * @module Rickshaw.Graph.Ember
+ * @property prototype
+ * @type {Object}
  */
-Rickshaw.Graph.Ember.prototype.setData = function() {
+Rickshaw.Graph.Ember.prototype = {
 
-    var allData = [];
+    /**
+     * @method render
+     * Rendering the Rickshaw graph based on the model data.
+     * @return {void}
+     */
+    render: function() {
+        this.setData();
+        this.graph.render();
+    },
 
-    this.properties.forEach(function(property, propertyIndex) {
+    /**
+     * @method ticks
+     * @param index {Integer}
+     * @param propertyName {String}
+     * Used for creating the X axis with custom labels from the model(s).
+     * @return {String,Integer}
+     */
+    ticks: function(index, propertyName) {
+        var properties = this.models.mapProperty(propertyName);
+        return properties[index];
+    },
 
-        var data = [];
+    /**
+     * @method setData
+     * Take the data from the models based on the property to create the data.
+     * @return {Array}
+     */
+    setData: function() {
 
-        this.models.forEach(function(model, modelIndex) {
+        var allData = [];
 
-            // Detect if the value we're dealing with is a number, otherwise we'll reset it to zero.
-            var value = parseFloat(model.get(property));
-            value = (isNaN(value) ? 0 : value);
+        this.properties.forEach(function(property, propertyIndex) {
 
-            // Iterate over each of the models and find the data based on the property we've specified.
-            data.push({ x: modelIndex, y: value });
+            var data = [];
+
+            this.models.forEach(function(model, modelIndex) {
+
+                // Detect if the value we're dealing with is a number, otherwise we'll reset it to zero.
+                var value = parseFloat(model.get(property));
+                value = (isNaN(value) ? 0 : value);
+
+                // Iterate over each of the models and find the data based on the property we've specified.
+                data.push({ x: modelIndex, y: value });
+
+            }, this);
+
+            // Set up the data, and then render the Rickshaw graph.
+            this.options.series[propertyIndex].data = data;
+
+            // Keep a track of all of the data.
+            allData.push(data);
 
         }, this);
 
-        // Set up the data, and then render the Rickshaw graph.
-        this.options.series[propertyIndex].data = data;
+        return allData;
 
-        // Keep a track of all of the data.
-        allData.push(data);
+    }
 
-    }, this);
-
-    return allData;
-
-};
-
-/**
- * @method render
- * Rendering the Rickshaw graph based on the model data.
- * @return {void}
- */
-Rickshaw.Graph.Ember.prototype.render = function() {
-
-    this.setData();
-    this.graph.render();
-
-};
-
-Rickshaw.Graph.Ember.prototype.ticks = function(index, propertyName) {
-    var properties = this.models.mapProperty(propertyName);
-    return properties[index];
 };

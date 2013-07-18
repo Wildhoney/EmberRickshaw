@@ -12,7 +12,7 @@ App.IndexView = Ember.View.extend({
 
         var graph = new Rickshaw.Graph.Ember({
             element: document.querySelector('.age-distribution-graph'),
-            renderer: 'line',
+            renderer: 'bar',
             unstack: true,
             width: 500,
             height: 250,
@@ -29,15 +29,15 @@ App.IndexView = Ember.View.extend({
             }]
         });
 
-        new Rickshaw.Graph.Axis.Y( {
-            graph: graph.toRickshaw(),
+        new Rickshaw.Graph.Axis.Y({
+            graph: graph,
             orientation: 'right',
             pixelsPerTick: 20,
             element: document.querySelector('.age-distribution-graph')
-        } );
+        });
 
         new Rickshaw.Graph.Axis.X({
-            graph: graph.toRickshaw(),
+            graph: graph,
             orientation: 'bottom',
             element: document.querySelector('.age-distribution-graph'),
             pixelsPerTick: 100,
@@ -47,17 +47,17 @@ App.IndexView = Ember.View.extend({
         });
 
 //        var legend = new Rickshaw.Graph.Legend({
-//            graph: graph.toRickshaw(),
+//            graph: graph,
 //            element: document.querySelector('.legend')
 //        });
 //
 //        var shelving = new Rickshaw.Graph.Behavior.Series.Toggle({
-//            graph: graph.toRickshaw(),
+//            graph: graph,
 //            legend: legend
 //        });
 
 //        new Rickshaw.Graph.HoverDetail({
-//            graph: graph.toRickshaw(),
+//            graph: graph,
 //            xFormatter: function(x) { return 'Cat: ' + x },
 //            yFormatter: function(y) { return y }
 //        });

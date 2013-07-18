@@ -31,7 +31,7 @@
     <script type="text/x-handlebars" data-template-name="index">
 
         <h1>We have {{length}} lovely cats.</h1>
-        <h2>Their age distribution is as follows:</h2>
+        <h2>Their age distribution vs. mice caught is as follows:</h2>
 
         <div class="age-distribution-graph"></div>
 
@@ -50,7 +50,7 @@
             {{/each}}
 
             <li class="add">
-                <a {{action "addCat"}} href="javascript:void(0);">Add another cat!</a>
+                <a {{action "addCat"}} href="javascript:void(0);">Add another cat&hellip;</a>
             </li>
 
         </ul>
