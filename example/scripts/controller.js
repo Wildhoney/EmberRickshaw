@@ -6,6 +6,8 @@
  */
 App.IndexController = Ember.ArrayController.extend({
 
+    noData: false,
+
     init: function() {
 
         var kipper      = Ember.Object.create({ name: 'Kipper', age: 17, caughtMice: 12 }),

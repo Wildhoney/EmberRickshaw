@@ -25,3 +25,5 @@ You'll be glad to know that if you already know Rickshaw, we haven't changed any
 If you're perceptive, you'll notice the only difference is that instead of specifying the array for the `data` attribute, you're instead supplying the property name on the model.
 
 Once you've configured the Rickshaw class, you can go ahead and manipulate your Ember models as you usually do, and `Rickshaw.Graph.Ember` will update itself when necessary.
+
+Sometimes there is not enough data to create the graph, therefore to display a message when there is insufficient data, create a node with the class name `no-data` inside of your graph container (`age-distribution-graph` in the example) and we'll do the rest!

@@ -30,6 +30,14 @@ div.age-distribution-graph {
     float: left;
 }
 
+span.no-data {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    color: darkgray;
+    font-style: italic;
+}
+
 svg.y_axis {
     top: 30px !important;
     left: 30px !important;

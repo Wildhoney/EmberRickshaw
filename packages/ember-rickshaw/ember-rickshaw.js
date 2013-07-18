@@ -95,8 +95,40 @@ Rickshaw.Graph.Ember.prototype = {
      * @return {void}
      */
     render: function() {
+
         this.setData();
+
+        // Grab the element.
+        var svg     = $(this.graph.element).find('svg'),
+            message = $(this.graph.element).find('.no-data');
+
+        if (this.count() === 0) {
+            // Hide the graph if there is no data.
+            svg.hide();
+            message.show();
+            return;
+        }
+
+        // Render the graph!
+        svg.show();
+        message.hide();
         this.graph.render();
+
+    },
+
+    /**
+     * @method count
+     * Count how many items of data there are in total.
+     * @return {Number}
+     */
+    count: function() {
+        var length = 0;
+        for (var seriesIndex in this.options.series) {
+            if (this.options.series.hasOwnProperty(seriesIndex) && isFinite(seriesIndex)) {
+                length = length + this.options.series[seriesIndex].data.length;
+            }
+        }
+        return length;
     },
 
     /**
