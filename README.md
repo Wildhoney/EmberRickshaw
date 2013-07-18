@@ -6,7 +6,7 @@ Using the <a href="http://code.shutterstock.com/rickshaw/" target="_blank">Ricks
 Live Demo
 ----------------
 
-An example of the automatic updating of graphs using Ember's observer pattern: <a href="https://dl.dropboxusercontent.com/sh/kgs9r55hguttkjf/qZ-pBUYz-a/example/dropbox/index.html" target="_blank">https://dl.dropboxusercontent.com/sh/kgs9r55hguttkjf/qZ-pBUYz-a/example/dropbox/index.html</a>.
+An example of the automatic updating of graphs using Ember's observer pattern: https://dl.dropboxusercontent.com/sh/kgs9r55hguttkjf/qZ-pBUYz-a/example/dropbox/index.html.
 
 Tutorial
 ----------------
