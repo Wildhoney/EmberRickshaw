@@ -30,6 +30,10 @@ App.IndexController = Ember.ArrayController.extend({
 
     },
 
+    deleteCat: function(model) {
+        this.removeObject(model);
+    },
+
     incrementCaughtMice: function(model) {
         model.incrementProperty('caughtMice');
     }

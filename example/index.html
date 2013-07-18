@@ -43,6 +43,7 @@
 
                 <li>
                     <div class="name">{{name}}</div>
+                    <a {{action "deleteCat" this}} href="javascript:void(0);">Delete</a>
                     <a {{action "incrementCaughtMice" this}} href="javascript:void(0);">Caught {{caughtMice}} mice!</a>
                     {{view Ember.TextField valueBinding="age"}}
                 </li>
