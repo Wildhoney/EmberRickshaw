@@ -39,7 +39,7 @@ span.no-data {
 }
 
 svg {
-    pointer-events: none;
+    pointer-events: none !important;
 }
 
 svg.y_axis {
