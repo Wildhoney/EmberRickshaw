@@ -3,7 +3,14 @@ YUI.add("yuidoc-meta", function(Y) {
     "classes": [
         "Rickshaw.Graph.Ember"
     ],
-    "modules": [],
-    "allModules": []
+    "modules": [
+        "Rickshaw.Graph.Ember"
+    ],
+    "allModules": [
+        {
+            "displayName": "Rickshaw.Graph.Ember",
+            "name": "Rickshaw.Graph.Ember"
+        }
+    ]
 } };
 });
