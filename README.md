@@ -33,4 +33,6 @@ If you're perceptive, you'll notice the only difference is that instead of speci
 
 Once you've configured the Rickshaw class, you can go ahead and manipulate your Ember models as you usually do, and `Rickshaw.Graph.Ember` will update itself when necessary.
 
+<h3>Insufficient Data</h3>
+
 Sometimes there is not enough data to create the graph, therefore to display a message when there is insufficient data, create a node with the class name `no-data` inside of your graph container (`age-distribution-graph` in the example) and we'll do the rest!
