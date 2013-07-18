@@ -3,6 +3,10 @@ Ember Rickshaw 0.1.0
 
 Using the <a href="http://code.shutterstock.com/rickshaw/" target="_blank">Rickshaw</a> graphing library with Ember &ndash; utilising Ember's observer pattern to automatically update the Rickshaw graph when any value in the model changes, and even when models are added and/or removed from the collection.
 
+Live Demo
+----------------
+
+An example of the automatic updating of graphs using Ember's observer pattern: <a href="https://dl.dropboxusercontent.com/sh/kgs9r55hguttkjf/qZ-pBUYz-a/example/dropbox/index.html" target="_blank">https://dl.dropboxusercontent.com/sh/kgs9r55hguttkjf/qZ-pBUYz-a/example/dropbox/index.html</a>.
 
 Tutorial
 ----------------

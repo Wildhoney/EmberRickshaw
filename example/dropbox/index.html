@@ -1,0 +1,50 @@
+<html>
+<head>
+
+    <title>EmberRickshaw by Wildhoney</title>
+
+    <script type="text/javascript" src="https://dl.dropboxusercontent.com/s/gen6rol7yl26wjw/scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://dl.dropboxusercontent.com/s/md4ev1r2u2ftnup/styles.css" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+
+    <script type="text/x-handlebars">
+        {{outlet}}
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="index">
+
+        <h1>We have {{length}} lovely cats.</h1>
+        <h2>Their age distribution vs. mice caught is as follows:</h2>
+
+        <div class="age-distribution-graph">
+            <span class="no-data">There is no data to display the graph.</span>
+        </div>
+
+        <div class="legend"></div>
+
+        <ul class="cats">
+
+            {{#each controller}}
+
+                <li>
+                    <div class="name">{{name}}</div>
+                    <a {{action "deleteCat" this}} href="javascript:void(0);">Delete</a>
+                    <a {{action "incrementCaughtMice" this}} href="javascript:void(0);">Caught {{caughtMice}} mice!</a>
+                    {{view Ember.TextField valueBinding="age"}}
+                </li>
+
+            {{/each}}
+
+            <li class="add">
+                <a {{action "addCat"}} href="javascript:void(0);">Add another cat&hellip;</a>
+            </li>
+
+        </ul>
+
+    </script>
+
+</body>
+</html>
