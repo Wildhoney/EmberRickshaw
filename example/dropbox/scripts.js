@@ -46008,6 +46008,9 @@ Rickshaw.Graph.Ember = function(options) {
     var collection      = options.collection,
         properties      = this.memoriseProperties(options);
 
+    // Remove the `collection` property from the object because it's just polluting the standard Rickshaw object.
+    delete options.collection;
+
     // Transform the property data into actual data from the collection.
     this.transformData.apply(options.series, [collection, properties]);
 
