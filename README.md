@@ -22,14 +22,14 @@ You'll be glad to know that if you already know Rickshaw, we haven't changed any
         collection: this.get('controller'),
         series: [{
             color: '#cae2f7',
-            data: 'age'
+            property: 'age'
         }]
     });
 
-If you're perceptive, you'll notice the only difference is that instead of specifying the array for the `data` attribute, you're instead supplying the property name on the model &ndash; we also supply the `collection` attribute.
+If you're perceptive, you'll notice the only difference is that instead of specifying the array for the `property` attribute, you're instead supplying the property name on the model &ndash; we also supply the `collection` attribute.
 
 * `collection`: collection of models to take the data from;
-* `data`: property name which we'll pluck from the collection;
+* `property`: property name which we'll pluck from the collection;
 
 Once you've configured the Rickshaw class, you can go ahead and manipulate your Ember models as you usually do, and `Rickshaw.Graph.Ember` will update itself when necessary.
 
