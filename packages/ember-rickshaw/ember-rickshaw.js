@@ -52,8 +52,10 @@ Rickshaw.Graph.Ember = function(options) {
      * @class RickshawGraphKlass
      * @constructor
      */
-    function RickshawGraphKlass() {
+    function RickshawGraphKlass(options) {
+
         this.options = options;
+
     }
 
     // Configure the prototypal inheritance as the following:
