@@ -38,6 +38,11 @@ span.no-data {
     font-style: italic;
 }
 
+svg {
+    pointer-events: none !important;
+    overflow: hidden;
+}
+
 svg.y_axis {
     top: 30px !important;
     left: 30px !important;
