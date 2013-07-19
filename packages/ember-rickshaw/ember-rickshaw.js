@@ -11,74 +11,165 @@ Rickshaw.Graph.Ember = function(options) {
     Ember.assert('You must supply the `collection` array in the `data` attribute.', !!options.collection);
 
     // Assert that we have the `property` object.
-    Ember.assert('You must specify the property in the `data` attribute to use for the graph data.', !!options.series[0].data);
+    Ember.assert('You must specify the `property` attribute to use for the graph data.', !!options.series[0].property);
 
-    var property    = options.series[0].data,
-        models      = options.collection;
+    var collection      = options.collection,
+        properties      = this.memoriseProperties(options);
 
-    // Take what we need.
-    this.models     = models;
-    this.properties = [];
-
-    // Store the options, and create a blank data array to initially render before the models are inspected.
-    this.options    = options;
-
-    for (var seriesIndex in options.series) {
-
-        if (options.series.hasOwnProperty(seriesIndex)) {
-
-            // Keep a track of the properties we're after for each series line.
-            this.properties.push(options.series[seriesIndex].data);
-
-        }
-
-    }
-
-    // Initialise the series data.
-    this.setData();
-
-    // We need an observer on each of the properties we're watching, so we need to iterate over them.
-    for (var propertyIndex in this.properties) {
-
-        if (this.properties.hasOwnProperty(propertyIndex)) {
-            // Add an observer for the property name. If the value changes, the graph will be automatically re-rendered.
-            Ember.addObserver(this.models, '@each.%@'.fmt(this.properties[propertyIndex]), this, 'render');
-        }
-
-    }
-
-    // Observe the length of the collection so the graph can re-render if models are added and/or removed.
-    Ember.addObserver(models, 'length', this, 'render');
+    // Transform the property data into actual data from the collection.
+    this.transformData.apply(options.series, [collection, properties]);
 
     if (Ember.isNone(options.element)) {
 
         // If we haven't specified the `element` option then we'll create a ghost DIV for testing purposes.
-        this.options.element = document.createElement('div');
+        options.element = document.createElement('div');
 
         // Let everybody know we're using Rickshaw in testing mode.
         Ember.Logger.info("We're using Rickshaw in testing mode and therefore nothing will be visible.");
 
     }
 
-    // Keep a reference to the original Rickshaw graph object, since we're only
-    // augmenting Rickshaw and not trying to replace it.
-    delete this.options.collection;
-    var graph   = new Rickshaw.Graph(this.options);
-    this.graph  = graph;
+    // Instantiate the `Rickshaw.Graph` class that we use for the base object.
+    var graph = new Rickshaw.Graph(options);
 
-    for (var methodName in this.__proto__) {
+    /**
+     * @class RickshawEmberKlass
+     * @param collection {Array}
+     * @param properties {Array}
+     * @constructor
+     */
+    function RickshawEmberKlass(collection, properties) {
 
-        if (this.__proto__.hasOwnProperty(methodName)) {
-            // Copy across all of the methods from the `__proto__` into the actual object, so that we can
-            // explicitly set the `__proto__` to the original graph instance to make `toRickshaw` obsolete.
-            this[methodName] = this.__proto__[methodName];
-            delete this.__proto__[methodName];
-        }
+        this.collection = collection;
+        this.properties = properties;
+
+        // Configure the observers so that when a property changes, the `render` method is invoked.
+        this.setupObservers();
 
     }
 
-    // Explicitly set the `__proto__` to the original graph (`Rickshaw.Graph`).
-    this.__proto__ = graph;
+    /**
+     * @class RickshawGraphKlass
+     * @constructor
+     */
+    function RickshawGraphKlass() {
+        this.options = options;
+    }
+
+    // Configure the prototypal inheritance as the following:
+    // RickshawEmberKlass -> RickshawGraphKlass -> Rickshaw.Graph -> Object
+    RickshawGraphKlass.prototype = graph;
+    RickshawEmberKlass.prototype = new RickshawGraphKlass(options);
+
+    /**
+     * @property rickshaw
+     * @type {Rickshaw.Graph}
+     * Base `Rickshaw.Graph` class.
+     */
+    RickshawGraphKlass.prototype.rickshaw       = graph;
+
+    /**
+     * @method transformData
+     * Take the data from the models based on the property to create the data.
+     * @return {Array}
+     */
+    RickshawEmberKlass.prototype.transformData  = Rickshaw.Graph.Ember.prototype.transformData;
+
+    /**
+     * @method render
+     * Rendering the Rickshaw graph based on the model data.
+     * @return {void}
+     */
+    RickshawEmberKlass.prototype.render         = function render() {
+
+        // Transform the data again because something has changed.
+        this.transformData.apply(this.options.series, [this.collection, this.properties]);
+
+        // Grab the element, the SVG element, and the `no-data` attribute, if it exists.
+        var element = $(this.element),
+            svg     = element.find('svg'),
+            message = element.find('.no-data');
+
+        if (this.count() === 0) {
+            // Hide the graph if there is no data.
+            svg.hide();
+
+            if (message) {
+                message.show();
+            }
+
+            return;
+        }
+
+        // Render the graph!
+        svg.show();
+
+        if (message) {
+            message.hide();
+        }
+
+        // Finally we can call the `render` method on the original Rickshaw class.
+        this.rickshaw.render();
+
+    };
+
+    /**
+     * @method count
+     * Count how many items of data there are in total.
+     * @return {Number}
+     */
+    RickshawEmberKlass.prototype.count          = function count() {
+
+        var length = 0;
+
+        for (var seriesIndex in this.options.series) {
+            if (this.options.series.hasOwnProperty(seriesIndex) && isFinite(seriesIndex)) {
+                length = length + this.options.series[seriesIndex].data.length;
+            }
+        }
+
+        return length;
+
+    };
+
+    /**
+     * @method ticks
+     * @param index {Integer}
+     * @param propertyName {String}
+     * Used for creating the X axis with custom labels from the model(s).
+     * @return {String,Integer}
+     */
+    RickshawEmberKlass.prototype.ticks          = function ticks(index, propertyName) {
+
+        var properties = this.collection.mapProperty(propertyName);
+        return properties[index];
+
+    };
+
+    /**
+     * @method setupObservers
+     * Add an observer to each of the properties that we're watching.
+     * @return {void}
+     */
+    RickshawEmberKlass.prototype.setupObservers = function() {
+
+        // We need an observer on each of the properties we're watching, so we need to iterate over them.
+        for (var propertyIndex in this.properties) {
+
+            if (this.properties.hasOwnProperty(propertyIndex)) {
+                // Add an observer for the property name. If the value changes, the graph will be automatically re-rendered.
+                Ember.addObserver(this.collection, '@each.%@'.fmt(this.properties[propertyIndex]), this, 'render');
+            }
+
+        }
+
+        // Observe the length of the collection so the graph can re-render if models are added and/or removed.
+        Ember.addObserver(this.collection, 'length', this, 'render');
+
+    };
+
+    // Instantiate the `RickshawEmberKlass` class with our collection and properties.
+    return new RickshawEmberKlass(collection, properties);
 
 };
 
@@ -90,73 +181,40 @@ Rickshaw.Graph.Ember = function(options) {
 Rickshaw.Graph.Ember.prototype = {
 
     /**
-     * @method render
-     * Rendering the Rickshaw graph based on the model data.
-     * @return {void}
+     * @method memoriseProperties
+     * @param options {Object}
+     * Take all of the properties that were asked to be observed, and drop them into an array for later use.
+     * @return {Array}
      */
-    render: function() {
+    memoriseProperties: function(options) {
 
-        this.setData();
+        var properties = [];
 
-        // Grab the element.
-        var svg     = $(this.graph.element).find('svg'),
-            message = $(this.graph.element).find('.no-data');
-
-        if (this.count() === 0) {
-            // Hide the graph if there is no data.
-            svg.hide();
-            message.show();
-            return;
-        }
-
-        // Render the graph!
-        svg.show();
-        message.hide();
-        this.graph.render();
-
-    },
-
-    /**
-     * @method count
-     * Count how many items of data there are in total.
-     * @return {Number}
-     */
-    count: function() {
-        var length = 0;
-        for (var seriesIndex in this.options.series) {
-            if (this.options.series.hasOwnProperty(seriesIndex) && isFinite(seriesIndex)) {
-                length = length + this.options.series[seriesIndex].data.length;
+        for (var seriesIndex in options.series) {
+            if (options.series.hasOwnProperty(seriesIndex)) {
+                // Keep a track of the properties we're after for each series line.
+                properties.push(options.series[seriesIndex].property);
             }
         }
-        return length;
+
+        return properties;
+
     },
 
     /**
-     * @method ticks
-     * @param index {Integer}
-     * @param propertyName {String}
-     * Used for creating the X axis with custom labels from the model(s).
-     * @return {String,Integer}
-     */
-    ticks: function(index, propertyName) {
-        var properties = this.models.mapProperty(propertyName);
-        return properties[index];
-    },
-
-    /**
-     * @method setData
+     * @method transformData
      * Take the data from the models based on the property to create the data.
      * @return {Array}
      */
-    setData: function() {
+    transformData: function(collection, properties) {
 
         var allData = [];
 
-        this.properties.forEach(function(property, propertyIndex) {
+        properties.forEach(function(property, propertyIndex) {
 
             var data = [];
 
-            this.models.forEach(function(model, modelIndex) {
+            collection.forEach(function(model, modelIndex) {
 
                 // Detect if the value we're dealing with is a number, otherwise we'll reset it to zero.
                 var value = parseFloat(model.get(property));
@@ -168,7 +226,7 @@ Rickshaw.Graph.Ember.prototype = {
             }, this);
 
             // Set up the data, and then render the Rickshaw graph.
-            this.options.series[propertyIndex].data = data;
+            this[propertyIndex].data = data;
 
             // Keep a track of all of the data.
             allData.push(data);

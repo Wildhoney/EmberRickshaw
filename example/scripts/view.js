@@ -21,11 +21,11 @@ App.IndexView = Ember.View.extend({
             series: [{
                 color: '#afd55e',
                 name: 'Age',
-                data: 'age'
+                property: 'age'
             }, {
                 color: '#ba5ed5',
                 name: 'Caught Mice',
-                data: 'caughtMice'
+                property: 'caughtMice'
             }]
         });
 

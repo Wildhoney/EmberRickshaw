@@ -40,6 +40,7 @@ span.no-data {
 
 svg {
     pointer-events: none !important;
+    overflow: hidden;
 }
 
 svg.y_axis {
