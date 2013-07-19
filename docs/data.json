@@ -9,7 +9,9 @@
                 "Rickshaw.Graph.Ember": 1
             },
             "classes": {
-                "Rickshaw.Graph.Ember": 1
+                "Rickshaw.Graph.Ember": 1,
+                "RickshawEmberKlass": 1,
+                "RickshawGraphKlass": 1
             },
             "fors": {},
             "namespaces": {}
@@ -20,13 +22,15 @@
             "name": "Rickshaw.Graph.Ember",
             "submodules": {},
             "classes": {
-                "Rickshaw.Graph.Ember": 1
+                "Rickshaw.Graph.Ember": 1,
+                "RickshawEmberKlass": 1,
+                "RickshawGraphKlass": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
             "file": "packages\\ember-rickshaw\\ember-rickshaw.js",
-            "line": 1,
+            "line": 51,
             "params": [
                 {
                     "name": "options",
@@ -52,36 +56,97 @@
             "namespace": "",
             "file": "packages\\ember-rickshaw\\ember-rickshaw.js",
             "line": 1
+        },
+        "RickshawEmberKlass": {
+            "name": "RickshawEmberKlass",
+            "shortname": "RickshawEmberKlass",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Rickshaw.Graph.Ember",
+            "namespace": "",
+            "file": "packages\\ember-rickshaw\\ember-rickshaw.js",
+            "line": 35,
+            "params": [
+                {
+                    "name": "collection",
+                    "description": "",
+                    "type": "Array"
+                },
+                {
+                    "name": "properties",
+                    "description": "",
+                    "type": "Array"
+                }
+            ],
+            "is_constructor": 1
+        },
+        "RickshawGraphKlass": {
+            "name": "RickshawGraphKlass",
+            "shortname": "RickshawGraphKlass",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Rickshaw.Graph.Ember",
+            "namespace": "",
+            "file": "packages\\ember-rickshaw\\ember-rickshaw.js",
+            "line": 51,
+            "is_constructor": 1
         }
     },
     "classitems": [
         {
             "file": "packages\\ember-rickshaw\\ember-rickshaw.js",
-            "line": 92,
+            "line": 64,
+            "itemtype": "property",
+            "name": "rickshaw",
+            "type": "{Rickshaw.Graph}\nBase `Rickshaw.Graph` class.",
+            "class": "RickshawGraphKlass",
+            "module": "Rickshaw.Graph.Ember"
+        },
+        {
+            "file": "packages\\ember-rickshaw\\ember-rickshaw.js",
+            "line": 71,
+            "itemtype": "method",
+            "name": "transformData\nTake the data from the models based on the property to create the data.",
+            "return": {
+                "description": "",
+                "type": "Array"
+            },
+            "class": "RickshawGraphKlass",
+            "module": "Rickshaw.Graph.Ember"
+        },
+        {
+            "file": "packages\\ember-rickshaw\\ember-rickshaw.js",
+            "line": 78,
             "itemtype": "method",
             "name": "render\nRendering the Rickshaw graph based on the model data.",
             "return": {
                 "description": "",
                 "type": "Void"
             },
-            "class": "Rickshaw.Graph.Ember",
+            "class": "RickshawGraphKlass",
             "module": "Rickshaw.Graph.Ember"
         },
         {
             "file": "packages\\ember-rickshaw\\ember-rickshaw.js",
-            "line": 119,
+            "line": 116,
             "itemtype": "method",
             "name": "count\nCount how many items of data there are in total.",
             "return": {
                 "description": "",
                 "type": "Number"
             },
-            "class": "Rickshaw.Graph.Ember",
+            "class": "RickshawGraphKlass",
             "module": "Rickshaw.Graph.Ember"
         },
         {
             "file": "packages\\ember-rickshaw\\ember-rickshaw.js",
-            "line": 134,
+            "line": 135,
             "itemtype": "method",
             "name": "ticks",
             "params": [
@@ -100,19 +165,50 @@
                 "description": "",
                 "type": "String,Integer"
             },
-            "class": "Rickshaw.Graph.Ember",
+            "class": "RickshawGraphKlass",
             "module": "Rickshaw.Graph.Ember"
         },
         {
             "file": "packages\\ember-rickshaw\\ember-rickshaw.js",
-            "line": 146,
+            "line": 149,
             "itemtype": "method",
-            "name": "setData\nTake the data from the models based on the property to create the data.",
+            "name": "setupObservers\nAdd an observer to each of the properties that we're watching.",
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "RickshawGraphKlass",
+            "module": "Rickshaw.Graph.Ember"
+        },
+        {
+            "file": "packages\\ember-rickshaw\\ember-rickshaw.js",
+            "line": 183,
+            "itemtype": "method",
+            "name": "memoriseProperties",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "\nTake all of the properties that were asked to be observed, and drop them into an array for later use.",
+                    "type": "Object"
+                }
+            ],
             "return": {
                 "description": "",
                 "type": "Array"
             },
-            "class": "Rickshaw.Graph.Ember",
+            "class": "RickshawGraphKlass",
+            "module": "Rickshaw.Graph.Ember"
+        },
+        {
+            "file": "packages\\ember-rickshaw\\ember-rickshaw.js",
+            "line": 204,
+            "itemtype": "method",
+            "name": "transformData\nTake the data from the models based on the property to create the data.",
+            "return": {
+                "description": "",
+                "type": "Array"
+            },
+            "class": "RickshawGraphKlass",
             "module": "Rickshaw.Graph.Ember"
         }
     ],

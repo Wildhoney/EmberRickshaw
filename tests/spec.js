@@ -8,7 +8,7 @@ describe('Ember Rickshaw', function() {
         collection: [Ember.Object.create({ name: 'Kipper', age: 17 })],
         series: [{
             color: '#cae2f7',
-            data: 'age'
+            property: 'age'
         }]
     });
 
@@ -21,8 +21,8 @@ describe('Ember Rickshaw', function() {
     });
 
     it ('It can set the data from any given model(s)', function() {
-        expect(graph.models.length).toEqual(1);
-        expect(graph.models[0].get('name') === 'Kipper').toBeTruthy();
+        expect(graph.collection.length).toEqual(1);
+        expect(graph.collection[0].get('name') === 'Kipper').toBeTruthy();
     });
 
 });

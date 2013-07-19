@@ -1,7 +1,9 @@
 YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
-        "Rickshaw.Graph.Ember"
+        "Rickshaw.Graph.Ember",
+        "RickshawEmberKlass",
+        "RickshawGraphKlass"
     ],
     "modules": [
         "Rickshaw.Graph.Ember"
