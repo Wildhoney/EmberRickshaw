@@ -42,8 +42,8 @@ Sometimes there is not enough data to create the graph, therefore to display a m
 Rickshaw supports plotting multiple layers, and because Rickshaw supports it, so do we! By now it should be self-evident how this works if you're familiar with Rickshaw:
 
     var graph = new Rickshaw.Graph.Ember({
-        element: document.querySelector('.age-distribution-graph'),
         renderer: 'bar',
+        element: document.querySelector('.age-distribution-graph'),
         unstack: true,
         width: 500,
         height: 250,
@@ -61,3 +61,7 @@ Rickshaw supports plotting multiple layers, and because Rickshaw supports it, so
     });
 
 You'll be happy to know that you can have as many groups as you like!
+
+<h3>Writing Unit Tests</h3>
+
+We make it easy for you to write unit tests for your graphs. Simply pass in the options minus the `element` item, and we'll create an empty node to use for testing.
