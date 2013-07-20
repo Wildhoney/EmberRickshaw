@@ -41,23 +41,23 @@ Sometimes there is not enough data to create the graph, therefore to display a m
 
 Rickshaw supports plotting multiple layers, and because Rickshaw supports it, so do we! By now it should be self-evident how this works if you're familiar with Rickshaw:
 
-var graph = new Rickshaw.Graph.Ember({
-    element: document.querySelector('.age-distribution-graph'),
-    renderer: 'bar',
-    unstack: true,
-    width: 500,
-    height: 250,
-    stroke: true,
-    collection: this.get('controller'),
-    series: [{
-        color: '#afd55e',
-        name: 'Age',
-        property: 'age'
-    }, {
-        color: '#ba5ed5',
-        name: 'Caught Mice',
-        property: 'caughtMice'
-    }]
-});
+    var graph = new Rickshaw.Graph.Ember({
+        element: document.querySelector('.age-distribution-graph'),
+        renderer: 'bar',
+        unstack: true,
+        width: 500,
+        height: 250,
+        stroke: true,
+        collection: this.get('controller'),
+        series: [{
+            color: '#afd55e',
+            name: 'Age',
+            property: 'age'
+        }, {
+            color: '#ba5ed5',
+            name: 'Caught Mice',
+            property: 'caughtMice'
+        }]
+    });
 
 You'll be happy to know that you can have as many groups as you like!
