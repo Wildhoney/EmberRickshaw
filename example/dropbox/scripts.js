@@ -46045,12 +46045,11 @@ Rickshaw.Graph.Ember = function(options) {
 
     /**
      * @class RickshawGraphKlass
+     * @param options {Object}
      * @constructor
      */
     function RickshawGraphKlass(options) {
-
         this.options = options;
-
     }
 
     // Configure the prototypal inheritance as the following:
@@ -46180,7 +46179,8 @@ Rickshaw.Graph.Ember.prototype = {
     /**
      * @method memoriseProperties
      * @param options {Object}
-     * Take all of the properties that were asked to be observed, and drop them into an array for later use.
+     * Find all of the properties that we're looking to plot on the graph, and which we'll need to observe
+     * for changes.
      * @return {Array}
      */
     memoriseProperties: function(options) {
@@ -46201,6 +46201,7 @@ Rickshaw.Graph.Ember.prototype = {
     /**
      * @method transformData
      * Take the data from the models based on the property to create the data.
+     * NOTE: Changes the original `option.series` data object.
      * @return {Array}
      */
     transformData: function(collection, properties) {
@@ -46222,10 +46223,8 @@ Rickshaw.Graph.Ember.prototype = {
 
             }, this);
 
-            // Set up the data, and then render the Rickshaw graph.
+            // Set up the data, and keep a track of it all.
             this[propertyIndex].data = data;
-
-            // Keep a track of all of the data.
             allData.push(data);
 
         }, this);
