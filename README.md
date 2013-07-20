@@ -62,6 +62,7 @@ Rickshaw supports plotting multiple layers, and because Rickshaw supports it, so
 
 You'll be happy to know that you can have as many groups as you like!
 
-<h3>Writing Unit Tests</h3>
+Writing Unit Tests
+----------------
 
 We make it easy for you to write unit tests for your graphs. Simply pass in the options minus the `element` item, and we'll create an empty node to use for testing.
