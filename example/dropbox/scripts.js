@@ -46000,16 +46000,28 @@ Rickshaw.Graph.Ember = function(options) {
 
     // Find the models that have been supplied. For the moment we only support one line, but will
     // support two or more in the near future.
-    Ember.assert('You must supply the `collection` array in the `data` attribute.', !!options.collection);
+    Ember.assert('You must supply a valid `collection` array in the `data` attribute.', !!options.collection);
 
     // Assert that we have the `property` object.
-    Ember.assert('You must specify the `property` attribute to use for the graph data.', !!options.series[0].property);
+    Ember.assert('You must specify the `property` string in the `series` attribute.', !!options.series[0].property);
 
     var collection      = options.collection,
         properties      = this.memoriseProperties(options);
 
     // Remove the `collection` property from the object because it's just polluting the standard Rickshaw object.
     delete options.collection;
+
+    if (!collection || properties.length === 0 || !options.series[0].property) {
+
+        // If there is no `collection`/`property` values when we'll fail gracefully with a mock object.
+        return {
+            onUpdate    : function() {},
+            render      : function() {
+                console.error("Unable to render the graph because you're either missing the `collection` and/or `property` attribute.");
+            }
+        };
+
+    }
 
     // Transform the property data into actual data from the collection.
     this.transformData.apply(options.series, [collection, properties]);
@@ -46189,8 +46201,16 @@ Rickshaw.Graph.Ember.prototype = {
 
         for (var seriesIndex in options.series) {
             if (options.series.hasOwnProperty(seriesIndex)) {
+
                 // Keep a track of the properties we're after for each series line.
-                properties.push(options.series[seriesIndex].property);
+                var property = options.series[seriesIndex].property || null;
+
+                if (!property) {
+                    console.error("Unable to locate the `property` attribute in series: %@.".fmt(seriesIndex));
+                }
+
+                properties.push(property);
+
             }
         }
 
@@ -46215,8 +46235,12 @@ Rickshaw.Graph.Ember.prototype = {
             collection.forEach(function(model, modelIndex) {
 
                 // Detect if the value we're dealing with is a number, otherwise we'll reset it to zero.
-                var value = parseFloat(model.get(property));
+                var value = parseFloat(property ? model.get(property) : false);
                 value = (isNaN(value) ? 0 : value);
+
+                if (property && !model.get(property)) {
+                    console.error("Unable to locate the `%@` property in collection.".fmt(property));
+                }
 
                 // Iterate over each of the models and find the data based on the property we've specified.
                 data.push({ x: modelIndex, y: value });
