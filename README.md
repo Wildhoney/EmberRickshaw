@@ -36,3 +36,28 @@ Once you've configured the Rickshaw class, you can go ahead and manipulate your 
 <h3>Insufficient Data</h3>
 
 Sometimes there is not enough data to create the graph, therefore to display a message when there is insufficient data, create a node with the class name `no-data` inside of your graph container (`age-distribution-graph` in the example) and we'll do the rest!
+
+<h3>Multiple Series Lines</h3>
+
+Rickshaw supports plotting multiple layers, and because Rickshaw supports it, so do we! By now it should be self-evident how this works if you're familiar with Rickshaw:
+
+var graph = new Rickshaw.Graph.Ember({
+    element: document.querySelector('.age-distribution-graph'),
+    renderer: 'bar',
+    unstack: true,
+    width: 500,
+    height: 250,
+    stroke: true,
+    collection: this.get('controller'),
+    series: [{
+        color: '#afd55e',
+        name: 'Age',
+        property: 'age'
+    }, {
+        color: '#ba5ed5',
+        name: 'Caught Mice',
+        property: 'caughtMice'
+    }]
+});
+
+You'll be happy to know that you can have as many groups as you like!
