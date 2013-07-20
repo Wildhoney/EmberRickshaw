@@ -229,10 +229,8 @@ Rickshaw.Graph.Ember.prototype = {
 
             }, this);
 
-            // Set up the data, and then render the Rickshaw graph.
+            // Set up the data, and keep a track of it all.
             this[propertyIndex].data = data;
-
-            // Keep a track of all of the data.
             allData.push(data);
 
         }, this);
