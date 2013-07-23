@@ -1,5 +1,6 @@
 Ember Rickshaw 0.1.0
 ================
+<img src="https://travis-ci.org/Wildhoney/EmberDroplet.png?branch=master" />
 
 Using the <a href="http://code.shutterstock.com/rickshaw/" target="_blank">Rickshaw</a> graphing library with Ember &ndash; utilising Ember's observer pattern to automatically update the Rickshaw graph when any value in the model changes, and even when models are added and/or removed from the collection.
 

@@ -55,6 +55,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-yuidoc');
     grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-contrib-concat');
+
+    // Testing.
+    grunt.registerTask('test', ['jshint', 'jasmine']);
+
+    // Build.
     grunt.registerTask('default', ['jshint', 'jasmine', 'yuidoc', 'uglify', 'concat']);
 
 };
