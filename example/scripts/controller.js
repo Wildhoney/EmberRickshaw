@@ -6,6 +6,28 @@
  */
 App.IndexController = Ember.ArrayController.extend({
 
+    actions: {
+
+        incrementCaughtMice: function(model) {
+            model.incrementProperty('caughtMice');
+        },
+
+        addCat: function() {
+
+            var name    = prompt('Name the little darling:'),
+                age     = prompt('How many years old is %@?'.fmt(name)),
+                caught  = prompt('And how many mice has %@ caught?'.fmt(name));
+
+            this.pushObject(Ember.Object.create({ name: name, age: parseInt(age), caughtMice: parseInt(caught) }));
+
+        },
+
+        deleteCat: function(model) {
+            this.removeObject(model);
+        }
+
+    },
+
     init: function() {
 
         var kipper      = Ember.Object.create({ name: 'Kipper', age: 17, caughtMice: 12 }),
@@ -18,24 +40,6 @@ App.IndexController = Ember.ArrayController.extend({
 
         this._super();
 
-    },
-
-    addCat: function() {
-
-        var name    = prompt('Name the little darling:'),
-            age     = prompt('How many years old is %@?'.fmt(name)),
-            caught  = prompt('And how many mice has %@ caught?'.fmt(name));
-
-        this.pushObject(Ember.Object.create({ name: name, age: parseInt(age), caughtMice: parseInt(caught) }));
-
-    },
-
-    deleteCat: function(model) {
-        this.removeObject(model);
-    },
-
-    incrementCaughtMice: function(model) {
-        model.incrementProperty('caughtMice');
     }
 
 });
