@@ -21,7 +21,9 @@ module.exports = function(grunt) {
         },
         concat: {
             scripts: {
-                src: [  'lib/jquery-1.10.1.js', 'lib/handlebars-1.0.rc.4.js', 'lib/*.js', 'packages/**/*.js',
+                src: [  'bower_components/jquery/jquery.js', 'bower_components/handlebars/handlebars.js',
+                        'bower_components/ember/ember.js', 'bower_components/d3/d3.min.js',
+                        'bower_components/rickshaw/rickshaw.js', 'packages/**/*.js',
                         'example/scripts/default.js', 'example/scripts/*.js'],
                 dest: 'example/dropbox/scripts.js'
             },
@@ -44,7 +46,9 @@ module.exports = function(grunt) {
                 src: 'packages/ember-rickshaw/ember-rickshaw.js',
                 options: {
                     specs: 'tests/spec.js',
-                    helpers: ['lib/jquery-1.10.1.js', 'lib/handlebars-1.0.rc.4.js', 'lib/ember-1.0.0-rc.6.js', 'lib/rickshaw.1.3.0.js', 'lib/d3.v3.min.js']
+                    helpers: ['bower_components/jquery/jquery.js', 'bower_components/handlebars/handlebars.js',
+                              'bower_components/ember/ember.js', 'bower_components/rickshaw/rickshaw.js',
+                              'bower_components/d3/d3.min.js']
                 }
             }
         }
