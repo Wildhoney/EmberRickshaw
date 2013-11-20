@@ -1,6 +1,3 @@
 /.idea
-.idea
 /node_modules
-node_modules
-/bower_componentss
-bower_componentss
+/bower_components
