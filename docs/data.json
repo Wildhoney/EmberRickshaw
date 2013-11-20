@@ -1,10 +1,10 @@
 {
     "project": {
-        "name": "EmberRickshaw"
+        "name": "ember-rickshaw"
     },
     "files": {
-        "packages\\ember-rickshaw\\ember-rickshaw.js": {
-            "name": "packages\\ember-rickshaw\\ember-rickshaw.js",
+        "packages/ember-rickshaw/ember-rickshaw.js": {
+            "name": "packages/ember-rickshaw/ember-rickshaw.js",
             "modules": {
                 "Rickshaw.Graph.Ember": 1
             },
@@ -29,7 +29,7 @@
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "packages\\ember-rickshaw\\ember-rickshaw.js",
+            "file": "packages/ember-rickshaw/ember-rickshaw.js",
             "line": 66,
             "params": [
                 {
@@ -54,7 +54,7 @@
             "extension_for": [],
             "module": "Rickshaw.Graph.Ember",
             "namespace": "",
-            "file": "packages\\ember-rickshaw\\ember-rickshaw.js",
+            "file": "packages/ember-rickshaw/ember-rickshaw.js",
             "line": 1
         },
         "RickshawEmberKlass": {
@@ -67,7 +67,7 @@
             "extension_for": [],
             "module": "Rickshaw.Graph.Ember",
             "namespace": "",
-            "file": "packages\\ember-rickshaw\\ember-rickshaw.js",
+            "file": "packages/ember-rickshaw/ember-rickshaw.js",
             "line": 50,
             "params": [
                 {
@@ -93,7 +93,7 @@
             "extension_for": [],
             "module": "Rickshaw.Graph.Ember",
             "namespace": "",
-            "file": "packages\\ember-rickshaw\\ember-rickshaw.js",
+            "file": "packages/ember-rickshaw/ember-rickshaw.js",
             "line": 66,
             "params": [
                 {
@@ -107,7 +107,7 @@
     },
     "classitems": [
         {
-            "file": "packages\\ember-rickshaw\\ember-rickshaw.js",
+            "file": "packages/ember-rickshaw/ember-rickshaw.js",
             "line": 80,
             "itemtype": "property",
             "name": "rickshaw",
@@ -116,7 +116,7 @@
             "module": "Rickshaw.Graph.Ember"
         },
         {
-            "file": "packages\\ember-rickshaw\\ember-rickshaw.js",
+            "file": "packages/ember-rickshaw/ember-rickshaw.js",
             "line": 87,
             "itemtype": "method",
             "name": "transformData\nTake the data from the models based on the property to create the data.",
@@ -128,7 +128,7 @@
             "module": "Rickshaw.Graph.Ember"
         },
         {
-            "file": "packages\\ember-rickshaw\\ember-rickshaw.js",
+            "file": "packages/ember-rickshaw/ember-rickshaw.js",
             "line": 94,
             "itemtype": "method",
             "name": "render\nRendering the Rickshaw graph based on the model data.",
@@ -140,7 +140,7 @@
             "module": "Rickshaw.Graph.Ember"
         },
         {
-            "file": "packages\\ember-rickshaw\\ember-rickshaw.js",
+            "file": "packages/ember-rickshaw/ember-rickshaw.js",
             "line": 132,
             "itemtype": "method",
             "name": "count\nCount how many items of data there are in total.",
@@ -152,7 +152,7 @@
             "module": "Rickshaw.Graph.Ember"
         },
         {
-            "file": "packages\\ember-rickshaw\\ember-rickshaw.js",
+            "file": "packages/ember-rickshaw/ember-rickshaw.js",
             "line": 151,
             "itemtype": "method",
             "name": "ticks",
@@ -176,7 +176,7 @@
             "module": "Rickshaw.Graph.Ember"
         },
         {
-            "file": "packages\\ember-rickshaw\\ember-rickshaw.js",
+            "file": "packages/ember-rickshaw/ember-rickshaw.js",
             "line": 165,
             "itemtype": "method",
             "name": "setupObservers\nAdd an observer to each of the properties that we're watching.",
@@ -188,7 +188,7 @@
             "module": "Rickshaw.Graph.Ember"
         },
         {
-            "file": "packages\\ember-rickshaw\\ember-rickshaw.js",
+            "file": "packages/ember-rickshaw/ember-rickshaw.js",
             "line": 199,
             "itemtype": "method",
             "name": "memoriseProperties",
@@ -207,7 +207,7 @@
             "module": "Rickshaw.Graph.Ember"
         },
         {
-            "file": "packages\\ember-rickshaw\\ember-rickshaw.js",
+            "file": "packages/ember-rickshaw/ember-rickshaw.js",
             "line": 229,
             "itemtype": "method",
             "name": "transformData\nTake the data from the models based on the property to create the data.\nNOTE: Changes the original `option.series` data object.",
