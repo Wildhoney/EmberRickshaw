@@ -1,6 +1,7 @@
 {
   "name": "ember-rickshaw",
-  "version": "0.1.0",
+  "description": "Rickshaw façade for Ember which allows automatic redrawing of graphs using Ember's observer pattern.",
+  "version": "0.1.1",
   "author": "Adam Timberlake",
   "devDependencies": {
     "grunt": "~0.4.1"
